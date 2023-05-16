@@ -1,12 +1,171 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Trello-clone</title>
-    <script type="module" src="./js/main.js"></script>
-  </head>
-  <body>
-    <div id="app"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trello-clone</title>
+  <script type="module" src="./js/main.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="container">
+      <!-- navbar -->
+      <nav class="navbar d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+        <!-- logo -->
+        <a class="navbar-brand" href="#">
+          <img src="./images/logo-trello.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+          trello-clone
+        </a>
+        <!-- clock -->
+        <h2 class="display-6 mb-0">19:41</h2>
+      </nav>
+    </div>
+  </header>
+
+  <!-- main -->
+  <main>
+    <div class="container">
+      <div class="row align-items-start">
+
+        <!-- first column -->
+        <div class="col">
+
+          <nav
+            class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
+            <h6 class="navbar-brand m-0 p-0">Todo<span class="badge text-bg-dark ms-2">4</span></h6>
+            <button class="btn btn-outline-success">Add new</button>
+          </nav>
+
+          <!-- card -->
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <h5 class="card-title m-0 w-100">Special title treatment</h5>
+
+                <div class="dropdown">
+                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
+                      <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <select class="form-select border-0 px-3" aria-label="Default select example">
+                        <option value="1">Todo</option>
+                        <option value="2">In progress</option>
+                        <option value="3">Done</option>
+                      </select>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+              <h6 class="m-0">User</h6>
+            </div>
+            <div class="card-footer text-body-secondary">
+              Created on:
+            </div>
+          </div>
+        </div>
+
+        <!-- second column -->
+        <div class="col">
+
+          <nav
+            class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
+            <h6 class="navbar-brand m-0 p-0">In progress<span class="badge text-bg-dark ms-2">4</span></h6>
+          </nav>
+
+          <!-- card -->
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <h5 class="card-title m-0 w-100">Special title treatment</h5>
+
+                <div class="dropdown">
+                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
+                      <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <select class="form-select border-0 px-3" aria-label="Default select example">
+                        <option value="1">Todo</option>
+                        <option value="2">In progress</option>
+                        <option value="3">Done</option>
+                      </select>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+              <h6 class="m-0">User</h6>
+            </div>
+            <div class="card-footer text-body-secondary">
+              Created on:
+            </div>
+          </div>
+        </div>
+
+        <!-- third column -->
+        <div class="col">
+
+          <nav
+            class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
+            <h6 class="navbar-brand m-0 p-0">Done<span class="badge text-bg-dark ms-2">4</span></h6>
+            <button class="btn btn-outline-danger">Remove all</button>
+          </nav>
+
+          <!-- card -->
+          <div class="card mt-3">
+            <div class="card-body">
+              <div class="d-flex align-items-center">
+                <h5 class="card-title m-0 w-100">Special title treatment</h5>
+
+                <div class="dropdown">
+                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
+                      <path
+                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    </svg>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <select class="form-select border-0 px-3" aria-label="Default select example">
+                        <option value="1">Todo</option>
+                        <option value="2">In progress</option>
+                        <option value="3">Done</option>
+                      </select>
+                    </li>
+                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+                  </ul>
+                </div>
+              </div>
+              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
+              <h6 class="m-0">User</h6>
+            </div>
+            <div class="card-footer text-body-secondary">
+              Created on:
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
 </html>
