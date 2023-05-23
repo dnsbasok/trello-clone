@@ -35,42 +35,11 @@
           <nav
             class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
             <h6 class="navbar-brand m-0 p-0">Todo<span class="badge text-bg-dark ms-2">4</span></h6>
-            <button class="btn btn-outline-success">Add new</button>
+            <button id="buttonAddTodo" class="btn btn-outline-success">Add new</button>
           </nav>
 
-          <!-- card -->
-          <div class="card mt-3">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <h5 class="card-title m-0 w-100">Special title treatment</h5>
-
-                <div class="dropdown">
-                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
-                      <path
-                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <select class="form-select border-0 px-3" aria-label="Default select example">
-                        <option value="1">Todo</option>
-                        <option value="2">In progress</option>
-                        <option value="3">Done</option>
-                      </select>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                  </ul>
-                </div>
-              </div>
-              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
-              <h6 class="m-0">User</h6>
-            </div>
-            <div class="card-footer text-body-secondary">
-              Created on:
-            </div>
+          <div id="todoList" class="cards">
+            <!-- buildTodoTemplate() from templates.js -->
           </div>
         </div>
 
@@ -82,40 +51,6 @@
             <h6 class="navbar-brand m-0 p-0">In progress<span class="badge text-bg-dark ms-2">4</span></h6>
           </nav>
 
-          <!-- card -->
-          <div class="card mt-3">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <h5 class="card-title m-0 w-100">Special title treatment</h5>
-
-                <div class="dropdown">
-                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
-                      <path
-                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <select class="form-select border-0 px-3" aria-label="Default select example">
-                        <option value="1">Todo</option>
-                        <option value="2">In progress</option>
-                        <option value="3">Done</option>
-                      </select>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                  </ul>
-                </div>
-              </div>
-              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
-              <h6 class="m-0">User</h6>
-            </div>
-            <div class="card-footer text-body-secondary">
-              Created on:
-            </div>
-          </div>
         </div>
 
         <!-- third column -->
@@ -127,44 +62,71 @@
             <button class="btn btn-outline-danger">Remove all</button>
           </nav>
 
-          <!-- card -->
-          <div class="card mt-3">
-            <div class="card-body">
-              <div class="d-flex align-items-center">
-                <h5 class="card-title m-0 w-100">Special title treatment</h5>
-
-                <div class="dropdown">
-                  <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                      class="bi bi-three-dots-vertical" viewbox="0 0 16 16">
-                      <path
-                        d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                    </svg>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <select class="form-select border-0 px-3" aria-label="Default select example">
-                        <option value="1">Todo</option>
-                        <option value="2">In progress</option>
-                        <option value="3">Done</option>
-                      </select>
-                    </li>
-                    <li><a class="dropdown-item" href="#">Edit</a></li>
-                    <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
-                  </ul>
-                </div>
-              </div>
-              <p class="card-text mt-3">With supporting text below as a natural lead-in to additional content.</p>
-              <h6 class="m-0">User</h6>
-            </div>
-            <div class="card-footer text-body-secondary">
-              Created on:
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
+
+    <!-- Modal add todo -->
+    <div class="modal fade" id="modalAddTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Add todo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <form id="formAddTodo" class="w-100">
+              <div id="formAddTodoContent">
+                <!-- buildModalAddTodoTemplate() from templates.js-->
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary d-md-flex justify-content-md-end">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal edit todo -->
+    <div class="modal fade" id="modalEditTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Add todo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body">
+            <form id="formAEditTodo" class="w-100">
+              <div id="formEditTodoContent">
+                <div class="d-flex align-items-center mb-2">
+                  <label class="text-muted me-2">Title</label>
+                  <input id="inputEditTitle" value="title" type="text" class="form-control flex-grow-1" required>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <label class="text-muted me-2">Description</label>
+                  <input id="inputEditDescription" value="title" type="text" class="form-control flex-grow-1" required>
+                </div>
+                <div class="d-flex align-items-center mb-2">
+                  <label class="text-muted me-2">User</label>
+                  <select id="selectEditUser" class="form-select mb-2" aria-label="Default select example">
+                    <option selected value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </div>
+              </div>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary d-md-flex justify-content-md-end">Add</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 </body>
 

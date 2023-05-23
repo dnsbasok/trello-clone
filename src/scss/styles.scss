@@ -2,5 +2,10 @@
 @import "bootstrap/scss/bootstrap";
 
 .navbar_height {
-height: 60px;
+  height: 60px;
+}
+
+.li_background:active {
+  background-color: $gray-100;
+  color: $gray-900;
 }
