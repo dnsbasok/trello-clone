@@ -10,7 +10,20 @@ import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templat
 
 // Variables
 let data = getData()
-// let dataTodo = []
+
+let dataTodo = []
+let dataProgress = []
+let dataDone = []
+
+data.forEach(item => {
+	if (item.status == 'todo') {
+		dataTodo.push(item)
+	} else if (item.status == 'progress') {
+    dataProgress.push(item)
+  } else if (item.status == 'done') {
+    dataDone.push(item)
+  }
+})
 
 const todoListElement = $('#todoList')
 const allCardsListElement = $('#allCardsList')
@@ -23,28 +36,20 @@ const formAddTodoElement = $('#formAddTodo')
 
 const modalEditTodoElement = $('#modalEditTodo')
 const modalEditTodoInstance = Modal.getOrCreateInstance(modalEditTodoElement)
-const modalAddEditContentElement = $('#formEditTodoContent')
-// const buttonEditTodoElement = $('#buttonEditTodo')
+const modalEditContentElement = $('#formEditTodoContent')
 const formEditTodoElement = $('#formEditTodo')
 
 // Init
-// data.forEach((item) => {
-//   if (item.status == 'todo') {
-//     dataTodo += item
-//   }
-// })
-
 // render(data, listElement)
 // renderCounters(data, countersWrapperElement)
 
 // Listeners
 buttonAddTodoElement.addEventListener('click', handleClickAddTodo)
-formAddTodoElement.addEventListener('submit', handleSubmitForm)
+formAddTodoElement.addEventListener('submit', handleSubmitAddForm)
+formEditTodoElement.addEventListener('submit', handleSubmitEditForm)
 
 allCardsListElement.addEventListener('click', handleClickDelete)
-
-// buttonEditTodoElement.addEventListener('click', handleClickAddTodo)
-// formEditTodoElement.addEventListener('submit', handleSubmitForm)
+allCardsListElement.addEventListener('click', handleClickEdit)
 
 // Handlers
 function handleClickAddTodo() {
@@ -52,12 +57,12 @@ function handleClickAddTodo() {
   modalAddTodoInstance.show()
 }
 
-function handleSubmitForm(event) {
+function handleSubmitAddForm(event) {
   event.preventDefault()
 
-  const title = $('#inputTitle').value
-  const description = $('#inputDescription').value
-  const user = $('#selectUser').value
+  const title = $('#inputAddTitle').value
+  const description = $('#inputAddDescription').value
+  const user = $('#selectAddUser').value
   const todo = new Todo(title, description, user)
 
   data.push(todo)
@@ -73,9 +78,40 @@ function handleClickDelete (event) {
   const { role, id } = target.dataset
 
   if (role == 'delete') {
-    data = data.filter((item) => item.id != id) // исключаю из массива удаляемую todo
+    data = data.filter((item) => item.id != id)
     render(data, todoListElement)
   }
+}
+
+let todoIdEdit = ''
+
+function handleClickEdit (event) {
+  const { target } = event
+  const { role, id } = target.dataset
+
+  const item = data.find(item => item.id == id)
+
+  if (role == 'edit') {
+    todoIdEdit = item.id
+    modalEditContentElement.innerHTML = buildModalEditTodoTemplate(item)
+    modalEditTodoInstance.show()
+  }
+}
+
+function handleSubmitEditForm(event) {
+  event.preventDefault()
+
+  const item = data.find(item => item.id == todoIdEdit)
+
+  item.title = $('#inputEditTitle').value
+  item.description = $('#inputEditDescription').value
+  item.user = $('#selectEditUser').value
+
+  render(data, todoListElement)
+  // renderCounters(data, countersWrapperElement)
+
+  modalEditTodoInstance.hide()
+  formEditTodoElement.reset()
 }
 
 console.log(data)

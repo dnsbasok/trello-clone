@@ -19,9 +19,9 @@ function buildTodoTemplate(todo) {
             <ul class="dropdown-menu">
               <li>
                 <select class="form-select border-0 px-3" aria-label="Default select example">
-                  <option value="1">Todo</option>
-                  <option value="2">In progress</option>
-                  <option value="3">Done</option>
+                  <option value="todo">Todo</option>
+                  <option value="progress">In progress</option>
+                  <option value="done">Done</option>
                 </select>
               </li>
               <li><button data-role="edit" data-id="${todo.id}" class="dropdown-item" href="#">Edit</button></li>
@@ -45,15 +45,15 @@ function buildModalAddTodoTemplate() {
   return `
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Title</label>
-      <input id="inputTitle" type="text" class="form-control flex-grow-1" required>
+      <input id="inputAddTitle" type="text" class="form-control flex-grow-1" required>
     </div>
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Description</label>
-      <input id="inputDescription" type="text" class="form-control flex-grow-1" required>
+      <input id="inputAddDescription" type="text" class="form-control flex-grow-1" required>
     </div>
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">User</label>
-      <select id="selectUser" class="form-select mb-2" aria-label="Default select example">
+      <select id="selectAddUser" class="form-select mb-2" aria-label="Default select example">
         <option selected value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
@@ -63,19 +63,19 @@ function buildModalAddTodoTemplate() {
 }
 
 // modal edit todo template
-function buildModalEditTodoTemplate(todo) {
+function buildModalEditTodoTemplate(todo = {}) {
   return `
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Title</label>
-      <input id="inputTitle" value="${todo.title}" type="text" class="form-control flex-grow-1" required>
+      <input id="inputEditTitle" value="${todo.title}" type="text" class="form-control flex-grow-1" required>
     </div>
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Description</label>
-      <input id="inputDescription" value="${todo.description}" type="text" class="form-control flex-grow-1" required>
+      <input id="inputEditDescription" value="${todo.description}" type="text" class="form-control flex-grow-1" required>
     </div>
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">User</label>
-      <select id="selectUser" class="form-select mb-2" aria-label="Default select example">
+      <select id="selectEditUser" class="form-select mb-2" aria-label="Default select example">
         <option selected value="1">One</option>
         <option value="2">Two</option>
         <option value="3">Three</option>
