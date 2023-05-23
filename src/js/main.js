@@ -6,13 +6,14 @@ import { Modal } from 'bootstrap'
 
 import { $, getData, setData, render } from './helpers.js'
 import { Todo } from './constructors.js'
-import { buildTodoTemplate, buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
+import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
 
 // Variables
 let data = getData()
 // let dataTodo = []
 
 const todoListElement = $('#todoList')
+const allCardsListElement = $('#allCardsList')
 
 const modalAddTodoElement = $('#modalAddTodo')
 const modalAddTodoInstance = Modal.getOrCreateInstance(modalAddTodoElement)
@@ -20,11 +21,11 @@ const modalAddTodoContentElement = $('#formAddTodoContent')
 const buttonAddTodoElement = $('#buttonAddTodo')
 const formAddTodoElement = $('#formAddTodo')
 
-// const modalEditTodoElement = $('#modalEditTodo')
-// const modalEditTodoInstance = Modal.getOrCreateInstance(modalEditTodoElement)
-// const modalAddEditContentElement = $('#formAddTodoContent')
-// const buttonEditTodoElement = $('#buttonAddTodo')
-// const formEditTodoElement = $('#formAddTodo')
+const modalEditTodoElement = $('#modalEditTodo')
+const modalEditTodoInstance = Modal.getOrCreateInstance(modalEditTodoElement)
+const modalAddEditContentElement = $('#formEditTodoContent')
+// const buttonEditTodoElement = $('#buttonEditTodo')
+const formEditTodoElement = $('#formEditTodo')
 
 // Init
 // data.forEach((item) => {
@@ -39,6 +40,8 @@ const formAddTodoElement = $('#formAddTodo')
 // Listeners
 buttonAddTodoElement.addEventListener('click', handleClickAddTodo)
 formAddTodoElement.addEventListener('submit', handleSubmitForm)
+
+allCardsListElement.addEventListener('click', handleClickDelete)
 
 // buttonEditTodoElement.addEventListener('click', handleClickAddTodo)
 // formEditTodoElement.addEventListener('submit', handleSubmitForm)
@@ -61,7 +64,18 @@ function handleSubmitForm(event) {
   render(data, todoListElement)
   // renderCounters(data, countersWrapperElement)
 
+  modalAddTodoInstance.hide()
   formAddTodoElement.reset()
+}
+
+function handleClickDelete (event) {
+  const { target } = event
+  const { role, id } = target.dataset
+
+  if (role == 'delete') {
+    data = data.filter((item) => item.id != id) // исключаю из массива удаляемую todo
+    render(data, todoListElement)
+  }
 }
 
 console.log(data)

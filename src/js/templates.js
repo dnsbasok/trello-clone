@@ -5,8 +5,8 @@ function buildTodoTemplate(todo) {
   return `
     <div class="card mt-3">
       <div class="card-body">
-        <div class="d-flex align-items-center">
-          <h5 class="card-title m-0 w-100">${todo.title}</h5>
+        <div class="d-flex align-items-top justify-content-between">
+          <h5 class="card-title m-0 w-75">${todo.title}</h5>
 
           <div class="dropdown">
             <button class="btn btn-outline-dark p-0 pb-1 border-0" type="button" data-bs-toggle="dropdown">
@@ -24,13 +24,13 @@ function buildTodoTemplate(todo) {
                   <option value="3">Done</option>
                 </select>
               </li>
-              <li><a class="dropdown-item" href="#">Edit</a></li>
-              <li><a class="dropdown-item text-danger" href="#">Delete</a></li>
+              <li><button data-role="edit" data-id="${todo.id}" class="dropdown-item" href="#">Edit</button></li>
+              <li><button data-role="delete" data-id="${todo.id}" class="dropdown-item text-danger" href="#">Delete</button></li>
             </ul>
           </div>
 
         </div>
-        <p class="card-text mt-3">${todo.description}</p>
+        <p class="card-text mt-3 w-75">${todo.description}</p>
         <h6 class="m-0">${todo.user}</h6>
       </div>
       <div class="card-footer text-body-secondary">
