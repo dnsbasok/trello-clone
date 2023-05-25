@@ -45,4 +45,9 @@ function renderCounter(collection, status, wrapper) {
   return counter
 }
 
-export { renderCards, renderCounter }
+function renderClock(wrapper) {
+  let date = new Date().toLocaleTimeString()
+  wrapper.innerHTML = date
+}
+
+export { renderCards, renderCounter, renderClock }

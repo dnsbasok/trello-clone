@@ -8,7 +8,7 @@ import { getUsers } from './users.js'
 import { $, getData, setData } from './helpers.js'
 import { Todo } from './constructors.js'
 import { buildModalAddTodoTemplate, buildModalEditTodoTemplate, buildAlertProgressTemplate } from './templates.js'
-import { renderCards, renderCounter } from './renders.js'
+import { renderCards, renderCounter, renderClock } from './renders.js'
 
 // Variables
 let data = getData()
@@ -44,6 +44,8 @@ const progressCounterElement = $('#progressCounter')
 const doneCounterElement = $('#doneCounter')
 
 const alertProgressWrapperElement = $('#alertProgressWrapper')
+
+const clockElement = $('#clock')
 
 // Init
 getUsers()
@@ -85,7 +87,6 @@ function handleSubmitAddForm(event) {
   renderCounter(data, statusTodo, todoCounterElement)
   renderCounter(data, statusProgress, progressCounterElement)
   renderCounter(data, statusDone, doneCounterElement)
-  // renderCounters(data, countersWrapperElement)
 
   modalAddTodoInstance.hide()
   formAddTodoElement.reset()
@@ -185,6 +186,9 @@ function handleChangeStatus(event) {
   renderCounter(data, statusProgress, progressCounterElement)
   renderCounter(data, statusDone, doneCounterElement)
 }
+
+renderClock(clockElement)
+setInterval(() => renderClock(clockElement), 1000);
 
 function handleBeforeUnload() {
   setData(data)
