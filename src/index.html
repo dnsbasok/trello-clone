@@ -34,7 +34,7 @@
 
           <nav
             class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
-            <h6 class="navbar-brand m-0 p-0">Todo<span class="badge text-bg-dark ms-2"><span>4</span></span></h6>
+            <h6 class="navbar-brand m-0 p-0">Todo<span id="todoCounter" class="badge text-bg-dark ms-2"><span>4</span></span></h6>
             <button id="buttonAddTodo" class="btn btn-outline-success">Add new</button>
           </nav>
 
@@ -48,7 +48,7 @@
 
           <nav
             class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
-            <h6 class="navbar-brand m-0 p-0">In progress<span class="badge text-bg-dark ms-2">4</span></h6>
+            <h6 class="navbar-brand m-0 p-0">In progress<span id="progressCounter" class="badge text-bg-dark ms-2">4</span></h6>
           </nav>
 
           <div id="progressList" class="cards">
@@ -62,7 +62,7 @@
 
           <nav
             class="navbar bg-light d-flex flex-column flex-md-row align-items-center px-3 border rounded-2 navbar_height">
-            <h6 class="navbar-brand m-0 p-0">Done<span class="badge text-bg-dark ms-2">4</span></h6>
+            <h6 class="navbar-brand m-0 p-0">Done<span id="doneCounter" class="badge text-bg-dark ms-2">4</span></h6>
             <button class="btn btn-outline-danger">Remove all</button>
           </nav>
 
@@ -121,6 +121,9 @@
     </div>
 
   </main>
+  <div class="alert alert-warning fixed-bottom w-75 m-auto mb-3 text-center" role="alert">
+    A simple warning alert—check it out!
+  </div>
 </body>
 
 </html>

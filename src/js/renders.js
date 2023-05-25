@@ -1,6 +1,6 @@
 import { buildTodoTemplate } from './templates.js'
 
-function renderCards(collection, wrapperTodo, wrapperProgress, wrapperDone ) {
+function renderCards(collection, wrapperTodo, wrapperProgress, wrapperDone) {
   let todoTemplates = ''
   let progressTemplates = ''
   let doneTemplates = ''
@@ -31,4 +31,18 @@ function renderCards(collection, wrapperTodo, wrapperProgress, wrapperDone ) {
   wrapperDone.innerHTML = doneTemplates
 }
 
-export { renderCards }
+function renderCounter(collection, status, wrapper) {
+  let counter = 0
+
+  collection.forEach((item) => {
+    if (item.status == status) {
+      counter++
+    }
+  })
+
+  wrapper.innerHTML = counter
+
+  return counter
+}
+
+export { renderCards, renderCounter }

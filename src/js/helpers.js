@@ -1,12 +1,12 @@
-function $ (selector) {
+function $(selector) {
   return document.querySelector(selector)
 }
 
-function getData () {
+function getData() {
   return JSON.parse(localStorage.getItem('data')) || []
 }
 
-function setData (source) {
+function setData(source) {
   localStorage.setItem('data', JSON.stringify(source))
 }
 

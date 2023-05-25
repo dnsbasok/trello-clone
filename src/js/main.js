@@ -8,7 +8,7 @@ import { getUsers } from './users.js'
 import { $, getData, setData } from './helpers.js'
 import { Todo } from './constructors.js'
 import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
-import { renderCards } from './renders.js'
+import { renderCards, renderCounter } from './renders.js'
 
 // Variables
 let data = getData()
@@ -16,6 +16,10 @@ let data = getData()
 let dataUsers = []
 
 let todoIdEdit = ''
+
+const statusTodo = 'todo'
+const statusProgress = 'progress'
+const statusDone = 'done'
 
 const todoListElement = $('#todoList')
 const progressListListElement = $('#progressList')
@@ -33,11 +37,18 @@ const modalEditTodoInstance = Modal.getOrCreateInstance(modalEditTodoElement)
 const modalEditContentElement = $('#formEditTodoContent')
 const formEditTodoElement = $('#formEditTodo')
 
+const todoCounterElement = $('#todoCounter')
+const progressCounterElement = $('#progressCounter')
+const doneCounterElement = $('#doneCounter')
+
 // Init
 getUsers()
   .then((data) => dataUsers = structuredClone(data))
 
 renderCards(data, todoListElement, progressListListElement, doneListElement)
+renderCounter(data, statusTodo, todoCounterElement)
+renderCounter(data, statusProgress, progressCounterElement)
+renderCounter(data, statusDone, doneCounterElement)
 
 // Listeners
 window.addEventListener('beforeunload', handleBeforeUnload)
@@ -66,6 +77,9 @@ function handleSubmitAddForm(event) {
 
   data.push(todo)
   renderCards(data, todoListElement, progressListListElement, doneListElement)
+  renderCounter(data, statusTodo, todoCounterElement)
+  renderCounter(data, statusProgress, progressCounterElement)
+  renderCounter(data, statusDone, doneCounterElement)
   // renderCounters(data, countersWrapperElement)
 
   modalAddTodoInstance.hide()
@@ -79,6 +93,9 @@ function handleClickDelete(event) {
   if (role == 'delete') {
     data = data.filter((item) => item.id != id)
     renderCards(data, todoListElement, progressListListElement, doneListElement)
+    renderCounter(data, statusTodo, todoCounterElement)
+    renderCounter(data, statusProgress, progressCounterElement)
+    renderCounter(data, statusDone, doneCounterElement)
   }
 }
 
@@ -105,6 +122,9 @@ function handleSubmitEditForm(event) {
   item.user = $('#selectEditUser').value
 
   renderCards(data, todoListElement, progressListListElement, doneListElement)
+  renderCounter(data, statusTodo, todoCounterElement)
+  renderCounter(data, statusProgress, progressCounterElement)
+  renderCounter(data, statusDone, doneCounterElement)
   // renderCounters(data, countersWrapperElement)
 
   modalEditTodoInstance.hide()
@@ -124,8 +144,11 @@ function handleChangeStatus(event) {
         break
 
       case 'progress':
-        if
-        item.status = 'progress'
+        if (renderCounter(data, statusProgress, progressCounterElement) <= 6) {
+          item.status = 'progress'
+        } else {
+
+        }
         break
 
       case 'done':
@@ -135,6 +158,9 @@ function handleChangeStatus(event) {
   }
 
   renderCards(data, todoListElement, progressListListElement, doneListElement)
+  renderCounter(data, statusTodo, todoCounterElement)
+  renderCounter(data, statusProgress, progressCounterElement)
+  renderCounter(data, statusDone, doneCounterElement)
 }
 
 function handleBeforeUnload() {
