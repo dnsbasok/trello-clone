@@ -4,26 +4,21 @@ import '../scss/styles.scss'
 // Import all of Bootstrap's JS
 import { Modal } from 'bootstrap'
 
-import { $, getData, setData, render } from './helpers.js'
+import { getUsers } from './users.js'
+import { $, getData, setData } from './helpers.js'
 import { Todo } from './constructors.js'
 import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
+import { renderCards } from './renders.js'
 
 // Variables
-let data = getData()
+const data = getData()
 
-let dataTodo = []
-let dataProgress = []
-let dataDone = []
+const dataTodo = []
+const dataProgress = []
+const dataDone = []
+let dataUsers = []
 
-data.forEach(item => {
-	if (item.status == 'todo') {
-		dataTodo.push(item)
-	} else if (item.status == 'progress') {
-    dataProgress.push(item)
-  } else if (item.status == 'done') {
-    dataDone.push(item)
-  }
-})
+let todoIdEdit = ''
 
 const todoListElement = $('#todoList')
 const allCardsListElement = $('#allCardsList')
@@ -40,10 +35,28 @@ const modalEditContentElement = $('#formEditTodoContent')
 const formEditTodoElement = $('#formEditTodo')
 
 // Init
-// render(data, listElement)
-// renderCounters(data, countersWrapperElement)
+getUsers()
+  .then((data) => dataUsers = structuredClone(data))
+
+divideData()
+
+renderCards(data, todoListElement)
+
+function divideData() {
+  data.forEach(item => {
+    if (item.status == 'todo') {
+      dataTodo.push(item)
+    } else if (item.status == 'progress') {
+      dataProgress.push(item)
+    } else if (item.status == 'done') {
+      dataDone.push(item)
+    }
+  })
+}
 
 // Listeners
+window.addEventListener('beforeunload', handleBeforeUnload)
+
 buttonAddTodoElement.addEventListener('click', handleClickAddTodo)
 formAddTodoElement.addEventListener('submit', handleSubmitAddForm)
 formEditTodoElement.addEventListener('submit', handleSubmitEditForm)
@@ -53,7 +66,7 @@ allCardsListElement.addEventListener('click', handleClickEdit)
 
 // Handlers
 function handleClickAddTodo() {
-  modalAddTodoContentElement.innerHTML = buildModalAddTodoTemplate()
+  modalAddTodoContentElement.innerHTML = buildModalAddTodoTemplate(dataUsers)
   modalAddTodoInstance.show()
 }
 
@@ -66,26 +79,25 @@ function handleSubmitAddForm(event) {
   const todo = new Todo(title, description, user)
 
   data.push(todo)
-  render(data, todoListElement)
+  renderCards(data, todoListElement)
   // renderCounters(data, countersWrapperElement)
+  divideData()
 
   modalAddTodoInstance.hide()
   formAddTodoElement.reset()
 }
 
-function handleClickDelete (event) {
+function handleClickDelete(event) {
   const { target } = event
   const { role, id } = target.dataset
 
   if (role == 'delete') {
     data = data.filter((item) => item.id != id)
-    render(data, todoListElement)
+    renderCards(data, todoListElement)
   }
 }
 
-let todoIdEdit = ''
-
-function handleClickEdit (event) {
+function handleClickEdit(event) {
   const { target } = event
   const { role, id } = target.dataset
 
@@ -93,7 +105,7 @@ function handleClickEdit (event) {
 
   if (role == 'edit') {
     todoIdEdit = item.id
-    modalEditContentElement.innerHTML = buildModalEditTodoTemplate(item)
+    modalEditContentElement.innerHTML = buildModalEditTodoTemplate(item, dataUsers)
     modalEditTodoInstance.show()
   }
 }
@@ -107,11 +119,15 @@ function handleSubmitEditForm(event) {
   item.description = $('#inputEditDescription').value
   item.user = $('#selectEditUser').value
 
-  render(data, todoListElement)
+  renderCards(data, todoListElement)
   // renderCounters(data, countersWrapperElement)
 
   modalEditTodoInstance.hide()
   formEditTodoElement.reset()
 }
 
-console.log(data)
+function handleBeforeUnload() {
+  data = []
+  data = dataTodo.concat(dataProgress).concat(dataDone)
+  setData(data)
+}

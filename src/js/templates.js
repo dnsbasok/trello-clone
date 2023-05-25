@@ -41,7 +41,13 @@ function buildTodoTemplate(todo) {
 }
 
 // modal add todo template
-function buildModalAddTodoTemplate() {
+function buildModalAddTodoTemplate(collection) {
+  let templates = ''
+  collection.forEach((item) => {
+    const template = `<option value="${item.name}">${item.name}</option>`
+    templates += template
+  })
+
   return `
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Title</label>
@@ -54,16 +60,25 @@ function buildModalAddTodoTemplate() {
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">User</label>
       <select id="selectAddUser" class="form-select mb-2" aria-label="Default select example">
-        <option selected value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        ${templates}
       </select>
     </div>
   `
 }
 
 // modal edit todo template
-function buildModalEditTodoTemplate(todo = {}) {
+function buildModalEditTodoTemplate(todo, collection) {
+  let templates = ''
+  collection.forEach((item) => {
+    let template = ''
+    if (item.name == todo.user) {
+      template = `<option id="selectEditUser" value="${item.name}" selected>${item.name}</option>`
+    } else {
+      template = `<option value="${item.name}">${item.name}</option>`
+    }
+    templates += template
+  })
+
   return `
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">Title</label>
@@ -76,9 +91,7 @@ function buildModalEditTodoTemplate(todo = {}) {
     <div class="d-flex align-items-center mb-2">
       <label class="text-muted me-2">User</label>
       <select id="selectEditUser" class="form-select mb-2" aria-label="Default select example">
-        <option selected value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        ${templates}
       </select>
     </div>
   `
