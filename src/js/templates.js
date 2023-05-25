@@ -18,7 +18,8 @@ function buildTodoTemplate(todo) {
             </button>
             <ul class="dropdown-menu">
               <li>
-                <select class="form-select border-0 px-3" aria-label="Default select example">
+                <select data-role="status" data-id="${todo.id}" class="form-select border-0 px-3">
+                  <option>Select status</option>
                   <option value="todo">Todo</option>
                   <option value="progress">In progress</option>
                   <option value="done">Done</option>

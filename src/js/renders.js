@@ -1,13 +1,34 @@
-import { buildTodoTemplate, buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
+import { buildTodoTemplate } from './templates.js'
 
-function renderCards(collection, wrapper) {
-  let templates = ''
+function renderCards(collection, wrapperTodo, wrapperProgress, wrapperDone ) {
+  let todoTemplates = ''
+  let progressTemplates = ''
+  let doneTemplates = ''
+
   collection.forEach((item) => {
-    const template = buildTodoTemplate(item)
-    templates += template
+    let template = ''
+
+    switch (item.status) {
+      case 'todo':
+        template = buildTodoTemplate(item)
+        todoTemplates += template
+        break
+
+      case 'progress':
+        template = buildTodoTemplate(item)
+        progressTemplates += template
+        break
+
+      case 'done':
+        template = buildTodoTemplate(item)
+        doneTemplates += template
+        break
+    }
   })
 
-  wrapper.innerHTML = templates
+  wrapperTodo.innerHTML = todoTemplates
+  wrapperProgress.innerHTML = progressTemplates
+  wrapperDone.innerHTML = doneTemplates
 }
 
 export { renderCards }

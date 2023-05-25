@@ -11,16 +11,15 @@ import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templat
 import { renderCards } from './renders.js'
 
 // Variables
-const data = getData()
+let data = getData()
 
-const dataTodo = []
-const dataProgress = []
-const dataDone = []
 let dataUsers = []
 
 let todoIdEdit = ''
 
 const todoListElement = $('#todoList')
+const progressListListElement = $('#progressList')
+const doneListElement = $('#doneList')
 const allCardsListElement = $('#allCardsList')
 
 const modalAddTodoElement = $('#modalAddTodo')
@@ -38,21 +37,7 @@ const formEditTodoElement = $('#formEditTodo')
 getUsers()
   .then((data) => dataUsers = structuredClone(data))
 
-divideData()
-
-renderCards(data, todoListElement)
-
-function divideData() {
-  data.forEach(item => {
-    if (item.status == 'todo') {
-      dataTodo.push(item)
-    } else if (item.status == 'progress') {
-      dataProgress.push(item)
-    } else if (item.status == 'done') {
-      dataDone.push(item)
-    }
-  })
-}
+renderCards(data, todoListElement, progressListListElement, doneListElement)
 
 // Listeners
 window.addEventListener('beforeunload', handleBeforeUnload)
@@ -63,6 +48,7 @@ formEditTodoElement.addEventListener('submit', handleSubmitEditForm)
 
 allCardsListElement.addEventListener('click', handleClickDelete)
 allCardsListElement.addEventListener('click', handleClickEdit)
+allCardsListElement.addEventListener('change', handleChangeStatus)
 
 // Handlers
 function handleClickAddTodo() {
@@ -79,9 +65,8 @@ function handleSubmitAddForm(event) {
   const todo = new Todo(title, description, user)
 
   data.push(todo)
-  renderCards(data, todoListElement)
+  renderCards(data, todoListElement, progressListListElement, doneListElement)
   // renderCounters(data, countersWrapperElement)
-  divideData()
 
   modalAddTodoInstance.hide()
   formAddTodoElement.reset()
@@ -93,7 +78,7 @@ function handleClickDelete(event) {
 
   if (role == 'delete') {
     data = data.filter((item) => item.id != id)
-    renderCards(data, todoListElement)
+    renderCards(data, todoListElement, progressListListElement, doneListElement)
   }
 }
 
@@ -119,15 +104,39 @@ function handleSubmitEditForm(event) {
   item.description = $('#inputEditDescription').value
   item.user = $('#selectEditUser').value
 
-  renderCards(data, todoListElement)
+  renderCards(data, todoListElement, progressListListElement, doneListElement)
   // renderCounters(data, countersWrapperElement)
 
   modalEditTodoInstance.hide()
   formEditTodoElement.reset()
 }
 
+function handleChangeStatus(event) {
+  const { target } = event
+  const { role, id } = target.dataset
+
+  const item = data.find(item => item.id == id)
+
+  if (role == 'status') {
+    switch (target.value) {
+      case 'todo':
+        item.status = 'todo'
+        break
+
+      case 'progress':
+        if
+        item.status = 'progress'
+        break
+
+      case 'done':
+        item.status = 'done'
+        break
+    }
+  }
+
+  renderCards(data, todoListElement, progressListListElement, doneListElement)
+}
+
 function handleBeforeUnload() {
-  data = []
-  data = dataTodo.concat(dataProgress).concat(dataDone)
   setData(data)
 }
