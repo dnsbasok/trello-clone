@@ -7,7 +7,7 @@ import { Modal } from 'bootstrap'
 import { getUsers } from './users.js'
 import { $, getData, setData } from './helpers.js'
 import { Todo } from './constructors.js'
-import { buildModalAddTodoTemplate, buildModalEditTodoTemplate } from './templates.js'
+import { buildModalAddTodoTemplate, buildModalEditTodoTemplate, buildAlertProgressTemplate } from './templates.js'
 import { renderCards, renderCounter } from './renders.js'
 
 // Variables
@@ -32,6 +32,8 @@ const modalAddTodoContentElement = $('#formAddTodoContent')
 const buttonAddTodoElement = $('#buttonAddTodo')
 const formAddTodoElement = $('#formAddTodo')
 
+const buttonRemoveDoneElement = $('#buttonRemoveDone')
+
 const modalEditTodoElement = $('#modalEditTodo')
 const modalEditTodoInstance = Modal.getOrCreateInstance(modalEditTodoElement)
 const modalEditContentElement = $('#formEditTodoContent')
@@ -40,6 +42,8 @@ const formEditTodoElement = $('#formEditTodo')
 const todoCounterElement = $('#todoCounter')
 const progressCounterElement = $('#progressCounter')
 const doneCounterElement = $('#doneCounter')
+
+const alertProgressWrapperElement = $('#alertProgressWrapper')
 
 // Init
 getUsers()
@@ -56,6 +60,7 @@ window.addEventListener('beforeunload', handleBeforeUnload)
 buttonAddTodoElement.addEventListener('click', handleClickAddTodo)
 formAddTodoElement.addEventListener('submit', handleSubmitAddForm)
 formEditTodoElement.addEventListener('submit', handleSubmitEditForm)
+buttonRemoveDoneElement.addEventListener('click', handleClickRemoveDone)
 
 allCardsListElement.addEventListener('click', handleClickDelete)
 allCardsListElement.addEventListener('click', handleClickEdit)
@@ -97,6 +102,18 @@ function handleClickDelete(event) {
     renderCounter(data, statusProgress, progressCounterElement)
     renderCounter(data, statusDone, doneCounterElement)
   }
+}
+
+function handleClickRemoveDone() {
+  let filterData = []
+  filterData = data.filter(function (item) {
+    return item.status == statusTodo || item.status == statusProgress;
+  })
+  data = filterData
+  renderCards(data, todoListElement, progressListListElement, doneListElement)
+  renderCounter(data, statusTodo, todoCounterElement)
+  renderCounter(data, statusProgress, progressCounterElement)
+  renderCounter(data, statusDone, doneCounterElement)
 }
 
 function handleClickEdit(event) {
@@ -144,10 +161,16 @@ function handleChangeStatus(event) {
         break
 
       case 'progress':
-        if (renderCounter(data, statusProgress, progressCounterElement) <= 6) {
+        if (renderCounter(data, statusProgress, progressCounterElement) + 1 <= 6) {
           item.status = 'progress'
         } else {
+          alertProgressWrapperElement.innerHTML = buildAlertProgressTemplate()
 
+          function alertProgressClose() {
+            alertProgressWrapperElement.innerHTML = ''
+          }
+
+          setTimeout(alertProgressClose, 3000);
         }
         break
 

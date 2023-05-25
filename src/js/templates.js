@@ -98,4 +98,12 @@ function buildModalEditTodoTemplate(todo, collection) {
   `
 }
 
-export { buildTodoTemplate, buildModalAddTodoTemplate, buildModalEditTodoTemplate }
+function buildAlertProgressTemplate() {
+  return `
+    <div id="alertProgress" class="alert alert-warning fixed-bottom w-75 m-auto mb-3 text-center" role="alert">
+      Too many tasks in progress..
+    </div>
+  `
+}
+
+export { buildTodoTemplate, buildModalAddTodoTemplate, buildModalEditTodoTemplate, buildAlertProgressTemplate }
